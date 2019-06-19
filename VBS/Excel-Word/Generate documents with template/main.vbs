@@ -6,11 +6,8 @@ Const HEADER_ROW = 1
 Const TEMPLATE_FILE = "template.docx"
 Const OUTPUT_DIR_NAME = "output"
 
-Const FILE_SYSTEM_OBJECT = "Scripting.FileSystemObject"
-Const EXCEL_APPLICATION = "Excel.Application"
-Const WORD_APPLICATION = "Word.Application"
 
-Dim fso : Set fso = CreateObject(FILE_SYSTEM_OBJECT)
+Dim fso : Set fso = CreateObject("Scripting.FileSystemObject")
 
 Dim currentDir : currentDir = fso.GetParentFolderName(WScript.ScriptFullName) & "/"
 
@@ -22,14 +19,14 @@ If fso.FolderExists(outputDir) = False Then fso.CreateFolder outputDir
 
 Dim dataFile : dataFile = currentDir & DATA_FILE_NAME
 
-Dim excelApp : Set excelApp = CreateObject(EXCEL_APPLICATION)
+Dim excelApp : Set excelApp = CreateObject("Excel.Application")
 excelApp.Visible = True
   
 Dim dataBook : Set dataBook = excelApp.WorkBooks.Open(dataFile)
 
 Dim dataSheet : Set dataSheet = dataBook.Sheets(1)
  
-Dim wordApp : Set wordApp = CreateObject(WORD_APPLICATION)
+Dim wordApp : Set wordApp = CreateObject("Word.Application")
 wordApp.Visible = True
 
 For row = HEADER_ROW + 1 To dataSheet.UsedRange.Rows.Count
